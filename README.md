@@ -30,13 +30,69 @@ oci请求几乎无延迟(为了保险起见加了5s的间隔，会自动判断�
 ```shell
 bash -c "$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
-一路会车 然后 `exec -l $SHELL`重启shell 
+一路回车 然后 `exec -l $SHELL`重启shell 
 
-使用 `oci -v`命令可以查看是否安装成功
+使用 `oci -v`命令显示版本号则安装成功
 
 ## 配置oci
 
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS（VM.Standard.A1.Flex）自动抢购脚本代码](https://www.daniao.org/14035.html)中的 步骤 **3、复制租户和用户的ocid** 和 步骤 **4、配置cli** 配置好oci和公钥 
+复制租户和用户的ocid
+1）甲骨文后台右上角>>用户设置>>分别点击用户和租户，在信息栏中有我们需要的ID，分别点击复制，可以保存在记事本备份好。具体看图：
+(./images/1.png)
+(./images/2.png)
+
+配置cli
+输入如下代码开始配置，配置的路径默认在root目录。
+```oci setup config
+```
+具体配置看下面
+```Enter a location for your config [/root/.oci/config]: 
+Enter a user OCID: #输入你的用户ocid
+Enter a tenancy OCID: #输入你租户的用户id
+Enter a region by index or name(e.g.
+1: ap-chiyoda-1, 2: ap-chuncheon-1, 3: ap-hyderabad-1, 4: ap-melbourne-1, 5: ap-mumbai-1,
+6: ap-osaka-1, 7: ap-seoul-1, 8: ap-sydney-1, 9: ap-tokyo-1, 10: ca-montreal-1,
+11: ca-toronto-1, 12: eu-amsterdam-1, 13: eu-frankfurt-1, 14: eu-zurich-1, 15: me-dubai-1,
+16: me-jeddah-1, 17: sa-santiago-1, 18: sa-saopaulo-1, 19: uk-cardiff-1, 20: uk-gov-cardiff-1,
+21: uk-gov-london-1, 22: uk-london-1, 23: us-ashburn-1, 24: us-gov-ashburn-1, 25: us-gov-chicago-1,
+26: us-gov-phoenix-1, 27: us-langley-1, 28: us-luke-1, 29: us-phoenix-1, 30: us-sanjose-1): 9  #这里选择区域
+Do you want to generate a new API Signing RSA key pair? (If you decline you will be asked to supply the path to an existing key.) [Y/n]: y  #输入y
+Enter a directory for your keys to be created [/root/.oci]: 
+Enter a name for your key [oci_api_key]: 
+Public key written to: /root/.oci/oci_api_key_public.pem
+Enter a passphrase for your private key (empty for no passphrase): 
+Private key written to: /root/.oci/oci_api_key.pem
+Fingerprint: 
+Config written to /root/.oci/config
+ 
+ 
+    If you haven't already uploaded your API Signing public key through the
+    console, follow the instructions on the page linked below in the section
+    'How to upload the public key':
+ 
+   https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
+   ```
+   复制生成的公钥，获取命令如下
+   ```cat /root/.oci/oci_api_key_public.pem
+   ```
+   把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
+   (./images/3.png)
+   检查oci配置是否正确
+   ```oci iam availability-domain list
+```
+如果这样提示表示配置正确，如果不是，检查你前面的配置
+```[root@host63c0dcac37 ~]# oci iam availability-domain list
+{
+"data": [
+{
+"compartment-id": "ocid1.tenancy.oc1..aaaaaaaauoxxxxxxxxxxxxx",
+"id": "ocid1.availabilitydomain.oc1..aaaaaaaaaixxxxxxxxxxxxx",
+"name": "uffff:AP-TOKYO-1-AD-1"
+}
+]
+}
+```
 
 # 下载main.tf
 
