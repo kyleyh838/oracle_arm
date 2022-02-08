@@ -45,8 +45,7 @@ bash -c "$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scr
 
 配置cli
 输入如下代码开始配置，配置的路径默认在root目录。
-```oci setup config
-```
+`oci setup config`
 
 具体配置看下面
 ```Enter a location for your config [/root/.oci/config]: 
@@ -76,14 +75,12 @@ Config written to /root/.oci/config
    https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
    ```
    复制生成的公钥，获取命令如下
-```cat /root/.oci/oci_api_key_public.pem
-```
+`cat /root/.oci/oci_api_key_public.pem`
 
    把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
    ![3](./images/3.png)
    检查oci配置是否正确
-```oci iam availability-domain list
-```
+`oci iam availability-domain list`
 
 如果这样提示表示配置正确，如果不是，检查你前面的配置
 ```[root@host63c0dcac37 ~]# oci iam availability-domain list
