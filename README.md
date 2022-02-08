@@ -37,15 +37,17 @@ bash -c "$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scr
 ## 配置oci
 
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS（VM.Standard.A1.Flex）自动抢购脚本代码](https://www.daniao.org/14035.html)中的 步骤 **3、复制租户和用户的ocid** 和 步骤 **4、配置cli** 配置好oci和公钥 
+
 复制租户和用户的ocid
-1）甲骨文后台右上角>>用户设置>>分别点击用户和租户，在信息栏中有我们需要的ID，分别点击复制，可以保存在记事本备份好。具体看图：
-![](./images/1.png)
-![](./images/2.png)
+甲骨文后台右上角>>用户设置>>分别点击用户和租户，在信息栏中有我们需要的ID，分别点击复制，可以保存在记事本备份好。具体看图：
+![1](./images/1.png)
+![2](./images/2.png)
 
 配置cli
 输入如下代码开始配置，配置的路径默认在root目录。
-   ```oci setup config
+```oci setup config
 ```
+
 具体配置看下面
 ```Enter a location for your config [/root/.oci/config]: 
 Enter a user OCID: #输入你的用户ocid
@@ -74,13 +76,15 @@ Config written to /root/.oci/config
    https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
    ```
    复制生成的公钥，获取命令如下
-   ```cat /root/.oci/oci_api_key_public.pem
+```cat /root/.oci/oci_api_key_public.pem
 ```
+
    把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
-   ![](./images/3.png)
+   ![3](./images/3.png)
    检查oci配置是否正确
-   ```oci iam availability-domain list
+```oci iam availability-domain list
 ```
+
 如果这样提示表示配置正确，如果不是，检查你前面的配置
 ```[root@host63c0dcac37 ~]# oci iam availability-domain list
 {
