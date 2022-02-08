@@ -38,12 +38,12 @@ bash -c "$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scr
 
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS（VM.Standard.A1.Flex）自动抢购脚本代码](https://www.daniao.org/14035.html)中的 步骤 **3、复制租户和用户的ocid** 和 步骤 **4、配置cli** 配置好oci和公钥 
 
-复制租户和用户的ocid
+1.复制租户和用户的ocid
 甲骨文后台右上角>>用户设置>>分别点击用户和租户，在信息栏中有我们需要的ID，分别点击复制，可以保存在记事本备份好。具体看图：
 ![1](./images/1.png)
 ![2](./images/2.png)
 
-配置cli
+2.配置cli
 输入如下代码开始配置，配置的路径默认在root目录。
 `oci setup config`
 
@@ -74,12 +74,12 @@ Config written to /root/.oci/config
  
    https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
    ```
-   复制生成的公钥，获取命令如下
+复制生成的公钥，获取命令如下
 `cat /root/.oci/oci_api_key_public.pem`
 
-   把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
-   ![3](./images/3.png)
-   检查oci配置是否正确
+把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
+![3](./images/3.png)
+检查oci配置是否正确
 `oci iam availability-domain list`
 
 如果这样提示表示配置正确，如果不是，检查你前面的配置
@@ -99,6 +99,15 @@ Config written to /root/.oci/config
 
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS自动抢购脚本 – 利用宝塔面板+oci](https://www.daniao.org/14121.html) 中的 步骤 **1、生成main.tf** 即可，下载到本地并解压出main.tf文件
 
+1.新建实例，创建的时候我们选择ubuntu20即可。注意，引导卷这里选择下硬盘大小，推荐100G：
+![4](./images/4.png)
+2.另存为堆栈，生产main.tf，这里默认即可：
+![5](./images/5.png)
+3.配置变量，也是默认，复查，默认即可：
+![6](./images/6.png)
+4.点击创建，默认会自动运行一次，我们点击下载 Terraform 配置，会得到一个压缩包，解压后，会有main.tf，用记事本打开，会有你需要的任何信息：
+![7](./images/7.png)
+
 **注意**
 创建实例的时候网络哪里不要动，默认就好！！！
 
@@ -115,7 +124,7 @@ sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/s
 sudo service sshd restart
 ```
 
-# 脚本需要改的地方
+# 脚本需要修改的地方
 ## 启动 tg推送
 
 修改
