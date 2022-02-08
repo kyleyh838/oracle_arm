@@ -127,7 +127,7 @@ sudo service sshd restart
 # 脚本需要修改的地方
 ## 启动 tg推送
 
-修改
+修改oracle_arm.py文件：
 ```python
 USE_TG = False  # 如果启用tg推送 要设置为True
 TG_BOT_TOKEN = ''  # 通过 @BotFather 申请获得，示例：1077xxx4424:AAFjv0FcqxxxxxxgEMGfi22B4yh15R5uw
@@ -156,7 +156,7 @@ TG_USER_ID = ''  # 用户、群组或频道 ID，示例：129xxx206 ,
 # 运行脚本
 
 ```
-git clone https://github.com/n0thing2speak/oracle_arm
+git clone https://github.com/kyleyh838/oracle_arm
 
 cd oracle_arm
 
@@ -166,12 +166,12 @@ pip3 install -r requirements.txt
 
 首先运行一遍测试一下
 `python3 oracle_arm.py main.tf` 
-稍等一下看返回结果,如果显示`抢注中，xxxxx` 就说明脚本没有问题
+稍等一下看返回结果,如果显示`抢注中，xxxxx` 就说明脚本没有问题，ctrl+c退出
 
-
+开启脚本后台运行：
 `nohup python3 oracle_arm.py main.tf >> /dev/null 2>&1 &`
 
-如果想保存一个日志，可以运行下面这个命令运行:
+如果想保存一个日志，可以运行下面这个命令:
 
 `nohup python3 oracle_arm.py main.tf  > oracle_arm.log 2>&1 &`
 
