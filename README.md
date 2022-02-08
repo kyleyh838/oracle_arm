@@ -39,12 +39,12 @@ bash -c "$(curl –L https://raw.githubusercontent.com/oracle/oci-cli/master/scr
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS（VM.Standard.A1.Flex）自动抢购脚本代码](https://www.daniao.org/14035.html)中的 步骤 **3、复制租户和用户的ocid** 和 步骤 **4、配置cli** 配置好oci和公钥 
 复制租户和用户的ocid
 1）甲骨文后台右上角>>用户设置>>分别点击用户和租户，在信息栏中有我们需要的ID，分别点击复制，可以保存在记事本备份好。具体看图：
-(./images/1.png)
-(./images/2.png)
+![](./images/1.png)
+![](./images/2.png)
 
 配置cli
 输入如下代码开始配置，配置的路径默认在root目录。
-```oci setup config
+   ```oci setup config
 ```
 具体配置看下面
 ```Enter a location for your config [/root/.oci/config]: 
@@ -75,9 +75,9 @@ Config written to /root/.oci/config
    ```
    复制生成的公钥，获取命令如下
    ```cat /root/.oci/oci_api_key_public.pem
-   ```
+```
    把展示出来的内容复制下来。并且添加到，甲骨文后台=>用户设置>>资源>>API秘钥>>添加API秘钥，看图：
-   (./images/3.png)
+   ![](./images/3.png)
    检查oci配置是否正确
    ```oci iam availability-domain list
 ```
@@ -98,7 +98,7 @@ Config written to /root/.oci/config
 
 参考文章[大鸟博客-Oracle甲骨文 ARM VPS自动抢购脚本 – 利用宝塔面板+oci](https://www.daniao.org/14121.html) 中的 步骤 **1、生成main.tf** 即可，下载到本地并解压出main.tf文件
 
-<!-- **注意**
+**注意**
 创建实例的时候网络哪里不要动，默认就好！！！
 
 然后密钥要提前下载好。
@@ -112,7 +112,7 @@ echo root:密码 |sudo chpasswd root
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
 sudo service sshd restart
-``` -->
+```
 
 # 脚本需要改的地方
 ## 启动 tg推送
